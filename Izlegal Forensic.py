@@ -43,7 +43,7 @@ headers = {
 
 if choice == 1:
     def reversedns():
-        dns = input("IP Address: "))
+        dns = input("IP Address: ")
         print("")
         r = requests.get(f"https://api.hackertarget.com/reversedns/?q={dns}")
 

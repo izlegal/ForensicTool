@@ -2,7 +2,7 @@ try:
     import requests
     import os
 except Exception:
-    print("pip install requests" or "pip install os")
+    print("pip install requests")
 
 os.system("cls")
 
@@ -33,9 +33,16 @@ if choice == 0:
     exit()
 print(banner)
 
+headers = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36",
+    "Pragma": "no-cache",
+    "Accept": "*/*",
+    "Content-Type": "application/x-www-form-urlencoded"
+}
+
 if choice == 1:
     def reversedns():
-        dns = str(input("IP Address: "))
+        dns = input("IP Address: ")
         print("")
         r = requests.get(f"https://api.hackertarget.com/reversedns/?q={dns}")
 
@@ -46,7 +53,7 @@ if choice == 1:
 
 if choice == 2:
     def dnslookup():
-        lookup = str(input("Domain Name: "))
+        lookup = input("Domain Name: ")
         print("")
         x = requests.get(f"https://api.hackertarget.com/dnslookup/?q={lookup}")
 
@@ -57,7 +64,7 @@ if choice == 2:
 
 if choice == 3:
     def geoip():
-        geoip = str(input("IP Address: "))
+        geoip = input("IP Address: ")
         print("")
         i = requests.get(f"https://api.hackertarget.com/geoip/?q={geoip}")
 
@@ -68,7 +75,7 @@ if choice == 3:
 
 if choice == 4:
     def zonetransfer():
-        zonetransfer = str(input("IP Address: "))
+        zonetransfer = input("IP Address: ")
         print("")
         z = requests.get(f"https://api.hackertarget.com/zonetransfer/?q={zonetransfer}")
 
@@ -79,7 +86,7 @@ if choice == 4:
 
 if choice == 5:
     def dnssubdomain():
-        subdomain = str(input("Domain Name: "))
+        subdomain = input("Domain Name: ")
         print("")
         k = requests.get(f"https://api.hackertarget.com/hostsearch/?q={subdomain}")
 
@@ -90,7 +97,7 @@ if choice == 5:
 
 if choice == 6:
     def reverseip():
-        reverseip = str(input("IP Address: "))
+        reverseip = input("IP Address: ")
         print("")
         mrx = requests.get(f"https://api.hackertarget.com/reverseiplookup/?q={reverseip}")
 
@@ -101,7 +108,7 @@ if choice == 6:
 
 if choice == 7:
     def ASN():
-        asnlookup = str(input("IP Address or ASN: "))
+        asnlookup = input("IP Address or ASN: ")
         print("")
         hasfa = requests.get(f"https://api.hackertarget.com/aslookup/?q={asnlookup}")
 
@@ -112,16 +119,10 @@ if choice == 7:
 
 if choice == 8:
     def emailvalid():
-        mailvalid = str(input("Email Gir: "))
+        mailvalid = input("Email Gir: ")
         print("")
 
         datas = f'address=&email={mailvalid}&submit=Verify+Email+Address'
-        headers = {
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36",
-            "Pragma": "no-cache",
-            "Accept": "*/*",
-            "Content-Type": "application/x-www-form-urlencoded"
-        }
         mrxvalid = requests.post("https://www.iplocation.net/verify-email-address/", data=datas, headers=headers)
 
         if 'is a valid email' in mrxvalid.text:
@@ -133,17 +134,11 @@ if choice == 8:
 
 if choice == 9:
     def proxycheck():
-        proxy = str(input("Mail Address: "))
+        proxy = input("Mail Address: ")
         print("")
         proxy.replace("@","%40")
 
         datas = f'email={proxy}&submit=Breached%3F'
-        headers = {
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36",
-            "Pragma": "no-cache",
-            "Accept": "*/*",
-            "Content-Type": "application/x-www-form-urlencoded"
-        }
         proxyy = requests.post("https://www.iplocation.net/data-breach-check", data=datas, headers=headers)
 
         if "Congratulations" in proxyy.text:
@@ -155,16 +150,10 @@ if choice == 9:
 
 if choice == 10:
     def DMARC():
-        ece = str(input("Domain Address: "))
+        ece = input("Domain Address: ")
         print("")
 
         datas = f'url={ece}&submit='
-        headers = {
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36",
-            "Pragma": "no-cache",
-            "Accept": "*/*",
-            "Content-Type": "application/x-www-form-urlencoded"
-        }
         DMARCR = requests.post("https://tools.iplocation.net/dmarc-lookup", data=datas, headers=headers)
 
         if "v=DMARC1" in DMARCR.text:

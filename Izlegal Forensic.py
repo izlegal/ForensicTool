@@ -1,8 +1,9 @@
 try:
     import requests
     import os
+    import json
 except Exception:
-    print("pip install requests")
+    print("Modülleriniz Eksik.")
 
 os.system("cls")
 
@@ -23,6 +24,11 @@ menu = """
  8 => Email Validator (ALL SMTP SERVER)
  9 => Have I Been Pwned?!
  10 => DMARC Lookup
+ 11 => TLS Scan
+ 12 => DNS Record ADVANCED
+ 13 => Screenshot Website
+ 14 => DNS Security Extensions Check
+ 15 => Honeypot Check (Default Binance Smart Chain)
 """
 
 print(menu)
@@ -38,6 +44,13 @@ headers = {
     "Pragma": "no-cache",
     "Accept": "*/*",
     "Content-Type": "application/x-www-form-urlencoded"
+}
+
+headerss = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36",
+    "Pragma": "no-cache",
+    "Accept": "*/*",
+    "Content-Type": "application/json"
 }
 
 if choice == 1:
@@ -129,6 +142,7 @@ if choice == 8:
             print("[+] Bu Mail E-Posta alabilir.")
         elif "is an invalid email" in mrxvalid.text:
             print("[-] Bu Mail Çalışmamaktadır.")
+        input()
 
     emailvalid()
 
@@ -145,6 +159,7 @@ if choice == 9:
             print("[+] Private Mail Address")
         elif "We found" in proxyy.text:
             print("[-] Mail Public!!")
+        input()
 
     proxycheck()
 
@@ -160,5 +175,94 @@ if choice == 10:
             print("[+] Have Firewall")
         elif "No record found" in DMARCR.text:
             print("[-] No Firewall")
+        input()
 
     DMARC()
+
+if choice == 11:
+    def TLS():
+        tlszac = input("Domain Address (örn: zaclol.dev): ")
+        print()
+
+        datam = {
+            "url":"https://"+ tlszac
+        }
+
+        zaclol = requests.post("https://geekflare.com/api/geekflare-api/tlsscan", json=datam, headers=headerss).text
+
+        y = json.loads(zaclol)
+        reqid = y["data"]["protocols"]
+        print("TLS Bilgileri: ", reqid)
+        input()
+    TLS()
+
+if choice == 12:
+    def DNSRECORD():
+        dnsrecord = input("Domain Address (örn: zaclol.dev): ")
+        print()
+
+        datamiz = {
+            "url":"https://"+ dnsrecord
+        }
+
+        zacmrx = requests.post("https://geekflare.com/api/geekflare-api/dnsrecord", json=datamiz, headers=headerss).text
+
+        xx = json.loads(zacmrx)
+        xxyy = xx["data"]
+        print("DNS Records Infos: ",xxyy)
+        input()
+
+    DNSRECORD()
+
+if choice == 13:
+    def screenshot():
+        ss = input("Domain Address For ScreenShot: ")
+        print()
+
+        datamizz = {
+            "url":"https://"+ ss
+        }
+
+        reqss = requests.post("https://geekflare.com/api/geekflare-api/screenshot", json=datamizz, headers=headerss).text
+
+        ii = json.loads(reqss)
+        iibb = ii["data"]
+        print("Screenshot URL => ",iibb)
+        input()
+
+    screenshot()
+
+if choice == 14:
+    def DNSSEC():
+        DNSSEC = input("Domain Address: ")
+        print()
+
+        datamizzz = {
+            "url":"https://"+ DNSSEC
+        }
+
+        rmrx = requests.post("https://geekflare.com/api/geekflare-api/dnssec", json=datamizzz, headers=headerss).text
+
+        rr = json.loads(rmrx)
+        print(rr["data"])
+        input()
+
+    DNSSEC()
+
+if choice == 15:
+    def Honeypot():
+        honeypot = input("Token Address: ")
+        print()
+
+        honeydata = f"address={honeypot}&chain=bsc"
+
+        honeyreq = requests.post(f"https://honeypot.api.rugdoc.io/api/honeypotStatus.js?address={honeypot}&chain=bsc", headers=headers, data=honeydata).text
+
+        if "status\":\"OK" in honeyreq:
+            print("Honeypot Passed")
+        else:
+            print("Invalid Token or Token've Honeypot")
+
+        input()
+
+    Honeypot()

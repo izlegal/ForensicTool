@@ -29,6 +29,9 @@ menu = """
  13 => Screenshot Website
  14 => DNS Security Extensions Check
  15 => Honeypot Check (Default Binance Smart Chain)
+ 16 => HiJacking & Protocol Downgrade Attack in Headers Check
+ 17 => ClickJacking Security in Headers Check
+ 18 => XSS Vulnerability in Headers Check
 """
 
 print(menu)
@@ -266,3 +269,53 @@ if choice == 15:
         input()
 
     Honeypot()
+
+if choice == 16:
+    def JSVuln():
+        # HiJacking & Protocol Downgrade Attack
+        istek = input("Domain addres: ")
+        print()
+
+        data = {"url": istek, "type": "hsts-test"}
+
+        r = requests.post("https://geekflare.com/tools/api/http-header", headers=headerss, json=data).text
+        if "strict-transport-security" in r:
+            print("[+] ENABLED HTTP Strict Transport Security. in response headers")
+        elif not "strict-transport-security" in r:
+            print("[-] No Security. Have Vulnerability!!")
+
+    JSVuln()
+
+if choice == 17:
+    def ClickJacking():
+
+        wuhu = input("Domain Address: ")
+        print()
+
+        dataa = {"url": wuhu, "type": "x-frame-options-test"}
+
+        req = requests.post("https://geekflare.com/tools/api/http-header", headers=headerss, json=dataa).text
+
+        if "x-frame-options" in req:
+            print("[+] ENABLED ClickJacking Security in response headers.")
+        elif not "x-frame-options" in req:
+            print("[-] No Security. Have Vulnerability!!")
+
+    ClickJacking()
+
+if choice == 18:
+    def XSS():
+
+        istekxss = input("Domain Address: ")
+        print()
+
+        datasss = {"url": istekxss, "type": "mime-sniffing-test"}
+
+        reqs = requests.post("https://geekflare.com/tools/api/http-header", headers=headerss, json=datasss).text
+
+        if "x-content-type-options" in reqs:
+            print("[+] ENABLED XSS Protection! in response headers")
+        elif not "x-content-type-options" in reqs:
+            print("[-] No Security. Have Vulnerability!!")
+
+    XSS()
